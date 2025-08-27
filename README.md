@@ -28,8 +28,6 @@ Target Users
  OOP Concepts Used
 - Encapsulation — Member class stores data.  
 - Abstraction — Menu hides internal details; exposes simple operations.  
-- Inheritance & Polymorphism** — Mentioned as future extensions (e.g., `PremiumMember`).  
-
 ---
 +----------------------+
 | GymManagementSystem  |
