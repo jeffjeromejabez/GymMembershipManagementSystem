@@ -33,12 +33,12 @@ class GymManagementSystem {
 
     public void addMember(int id, String name, int age, String type) {
         members.add(new Member(id, name, age, type));
-        System.out.println("✅ Member added successfully!");
+        System.out.println(" Member added successfully!");
     }
 
     public void viewAllMembers() {
         if (members.isEmpty()) {
-            System.out.println("⚠ No members found!");
+            System.out.println(" No members found!");
         } else {
             System.out.println("\n--- Member List ---");
             members.forEach(System.out::println);
@@ -60,9 +60,9 @@ class GymManagementSystem {
     public void cancelMembership(int id) {
         boolean removed = members.removeIf(m -> m.getId() == id);
         if (removed) {
-            System.out.println("✅ Membership cancelled!");
+            System.out.println(" Membership cancelled!");
         } else {
-            System.out.println("❌ Member not found!");
+            System.out.println(" Member not found!");
         }
     }
 }
@@ -115,13 +115,14 @@ class Main {
                     break;
 
                 case 5:
-                    System.out.println("👋 Exiting system. Goodbye!");
+                    System.out.println(" Exiting system. Goodbye!");
                     sc.close();
                     return;
 
                 default:
-                    System.out.println("⚠ Invalid choice, try again!");
+                    System.out.println(" Invalid choice, try again!");
             }
         }
     }
 }
+
