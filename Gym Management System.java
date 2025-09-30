@@ -1,7 +1,6 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
-// Encapsulation: Member class
+
 class Member {
     private int id;
     private String name;
@@ -15,7 +14,6 @@ class Member {
         this.membershipType = membershipType;
     }
 
-    // Getters & Setters
     public int getId() { return id; }
     public String getName() { return name; }
     public int getAge() { return age; }
@@ -26,39 +24,53 @@ class Member {
         return "ID: " + id + " | Name: " + name + " | Age: " + age + " | Membership: " + membershipType;
     }
 }
-
-// Abstraction: System hides details, shows menu-driven operations
 class GymManagementSystem {
     private ArrayList<Member> members = new ArrayList<>();
 
+    // Add new member
     public void addMember(int id, String name, int age, String type) {
+        for (Member m : members) {
+            if (m.getId() == id) {
+                System.out.println(" Member with ID " + id + " already exists!");
+                return;
+            }
+        }
         members.add(new Member(id, name, age, type));
         System.out.println(" Member added successfully!");
     }
-
     public void viewAllMembers() {
         if (members.isEmpty()) {
             System.out.println(" No members found!");
         } else {
             System.out.println("\n--- Member List ---");
-            members.forEach(System.out::println);
+            for (Member m : members) {
+                System.out.println(m);
+            }
         }
     }
-
     public void searchMember(int id) {
-        List<Member> result = members.stream()
-                .filter(m -> m.getId() == id)
-                .collect(Collectors.toList());
-
-        if (result.isEmpty()) {
-            System.out.println("❌ Member not found!");
-        } else {
-            result.forEach(System.out::println);
+        boolean found = false;
+        for (Member m : members) {
+            if (m.getId() == id) {
+                System.out.println(m);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println(" Member not found!");
         }
     }
-
     public void cancelMembership(int id) {
-        boolean removed = members.removeIf(m -> m.getId() == id);
+        Iterator<Member> it = members.iterator();
+        boolean removed = false;
+        while (it.hasNext()) {
+            if (it.next().getId() == id) {
+                it.remove();
+                removed = true;
+                break;
+            }
+        }
         if (removed) {
             System.out.println(" Membership cancelled!");
         } else {
@@ -66,9 +78,7 @@ class GymManagementSystem {
         }
     }
 }
-
-// Main program
-class Main {
+public class Main {
     public static void main(String[] args) {
         GymManagementSystem gym = new GymManagementSystem();
         Scanner sc = new Scanner(System.in);
@@ -81,7 +91,15 @@ class Main {
             System.out.println("4. Cancel Membership");
             System.out.println("5. Exit");
             System.out.print("Enter choice: ");
-            int choice = sc.nextInt();
+
+            int choice;
+            try {
+                choice = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println(" Invalid input! Enter a number.");
+                sc.nextLine();
+                continue;
+            }
 
             switch (choice) {
                 case 1:
