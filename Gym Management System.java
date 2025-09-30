@@ -103,17 +103,22 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Enter ID: ");
-                    int id = sc.nextInt();
-                    sc.nextLine(); // consume newline
-                    System.out.print("Enter Name: ");
-                    String name = sc.nextLine();
-                    System.out.print("Enter Age: ");
-                    int age = sc.nextInt();
-                    sc.nextLine();
-                    System.out.print("Enter Membership Type (Regular/Premium): ");
-                    String type = sc.nextLine();
-                    gym.addMember(id, name, age, type);
+                    try {
+                        System.out.print("Enter ID: ");
+                        int id = sc.nextInt();
+                        sc.nextLine(); // consume newline
+                        System.out.print("Enter Name: ");
+                        String name = sc.nextLine();
+                        System.out.print("Enter Age: ");
+                        int age = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Enter Membership Type (Regular/Premium): ");
+                        String type = sc.nextLine();
+                        gym.addMember(id, name, age, type);
+                    } catch (InputMismatchException e) {
+                        System.out.println(" Invalid input! Please enter valid numbers for ID and Age.");
+                        sc.nextLine();
+                    }
                     break;
 
                 case 2:
@@ -122,14 +127,24 @@ public class Main {
 
                 case 3:
                     System.out.print("Enter Member ID: ");
-                    int searchId = sc.nextInt();
-                    gym.searchMember(searchId);
+                    try {
+                        int searchId = sc.nextInt();
+                        gym.searchMember(searchId);
+                    } catch (InputMismatchException e) {
+                        System.out.println(" Invalid input! Enter a number.");
+                        sc.nextLine();
+                    }
                     break;
 
                 case 4:
                     System.out.print("Enter Member ID to cancel: ");
-                    int cancelId = sc.nextInt();
-                    gym.cancelMembership(cancelId);
+                    try {
+                        int cancelId = sc.nextInt();
+                        gym.cancelMembership(cancelId);
+                    } catch (InputMismatchException e) {
+                        System.out.println(" Invalid input! Enter a number.");
+                        sc.nextLine();
+                    }
                     break;
 
                 case 5:
@@ -143,4 +158,3 @@ public class Main {
         }
     }
 }
-
